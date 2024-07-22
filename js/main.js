@@ -1,79 +1,110 @@
+let set_id = 1;
+class Producto {
+    constructor(nombre, precio, stock) {
+        this.id = set_id++;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock || Math.ceil((Math.random() * 20));
+    };
+};
 
-let nombre = prompt('ingrese nombre')
-let apellido = prompt('ingrese apellido')
-alert(`Bienvenido ${nombre} ${apellido}, a continuacion seleccione la moneda que desea comprar`)
+const productos = [
+    new Producto('Remera', 15000),
+    new Producto('Pantalón', 20000),
+    new Producto('Campera', 10000)
+];
 
-let operando;
+function comprarProducto() {
+    let nombre;
+    let compra = [];
+    let producto;
 
-for (let i = 0; i < 2; i++)
-{
-    let moneda = prompt('Seleccione la moneda con valor numerico:  \n Dolar \n Libra \n Euro \n Real').toLocaleLowerCase();
+    while (compra.length === 0) {
+        nombre = prompt(`Productos: \n\n${productos.map(producto => `Prenda: ${producto.nombre}\nPrecio: ${producto.precio}\nStock: ${producto.stock}`).join('\n\n')}\n\nIngrese el nombre del producto a comprar`).toLocaleLowerCase();
+        
+        if (nombre) {
+            compra = productos.filter(producto => producto.nombre.toLocaleLowerCase() === nombre.toLocaleLowerCase());
+            if (compra.length === 0) {
+                console.log('Producto no encontrado');
+            }
+        } else {
+            console.log('Nombre no válido');
+        }
+    }
 
-    let dolar = 1355.00 
-    let libraEsterlina = 1604.00
-    let euro = 1433.00
-    let real = 249.00
+    if (compra.length > 1) {
+        const productIndex = parseInt(prompt(`Productos: \n\n${compra.map((producto, index) => `(${index + 1}) Prenda: ${producto.nombre}\nPrecio: ${producto.precio}\nStock: ${producto.stock}`).join('\n\n')}\n\nIngrese el número del producto a comprar`)) - 1;
+        
+        if (productIndex >= 0 && productIndex < compra.length) {
+            producto = compra[productIndex];
+        } else {
+            console.log('Producto no encontrado');
+            comprarProducto();
+        }
+    } else if (compra.length === 1) {
+        producto = compra[0];
+    }
 
-    let precioMoneda;
-    switch (moneda) {
-        case 'dolar':
-            precioMoneda = dolar;
-            alert(`El precio del ${moneda} es de ${dolar}`);
+    if (producto) {
+        const cantidad = parseInt(prompt('Ingrese la cantidad a comprar'));
+        if (cantidad <= producto.stock) {
+            producto.stock -= cantidad;
+            console.log(`Compra realizada con éxito\nNombre: ${producto.nombre}\nPrecio: ${producto.precio}\nCantidad: ${cantidad}`);
+        } else {
+            console.log('No hay stock suficiente');
+            comprarProducto();  
+        }
+    }
+}
+
+function venderProducto() {
+    const nombre = prompt('Ingrese el nombre del producto');
+    let precio
+    while (true) {
+        precio = parseInt(prompt('Ingrese el precio del producto'));
+        if (!isNaN(precio) && precio > 0) {
             break;
-        case 'libra':
-            precioMoneda = libraEsterlina;
-            alert(`El precio de la ${moneda} esterlina es de ${libraEsterlina}`);
+        } else {
+            console.log('Precio inválido, ingrese un número mayor a 0');
+        }
+    }
+    let stock;
+    while (true) {
+        stock = parseInt(prompt('Ingrese el stock del producto'));
+        if (!isNaN(stock)) {
             break;
-        case 'euro':
-            precioMoneda = euro;
-            alert(`El precio del ${moneda} es de ${euro}`);
+        }
+        console.log('Por favor, ingrese un stock con valor numérico.');
+    }
+    if (nombre && precio && stock) {
+        const producto = new Producto(nombre, precio, stock);
+        productos.push(producto);
+        console.log(`Producto agregado:\nNombre: ${producto.nombre}\nPrecio: ${producto.precio}\nStock: ${producto.stock}`);
+    }
+}   
+
+
+const nombre = prompt('¿Cuál es tu nombre?');
+const apellido = prompt('¿Cuál es tu apellido?');
+
+for (let i = 0; i < 3; i++) {
+    const operacion = parseInt(prompt(`Bienvenido a nuestro tienda ${nombre} ${apellido}, ¿con qué podemos ayudarte hoy?\n1: Comprar un producto\n2: Vender un producto\n3: Salir`));
+
+    switch (operacion) {
+        case 1:
+            comprarProducto();
             break;
-        case 'real':
-            precioMoneda = real;
-            alert(`El precio del ${moneda} es de ${real}`);
+        case 2:
+            venderProducto();
+            break;
+        case 3:
+            alert('Gracias por visitarnos');
+            console.log('Salir');
             break;
         default:
-            alert('Moneda no reconocida');
-    }
-    if (!precioMoneda) {
-        i--;
-        continue;
-    }
+            console.log('Operación no válida');
+            break;
+    };
+};
 
-    let respuesta = parseInt(prompt('Si desea comprar esta moneda ingrese: 1 \nSi desea salir escriba: 2'));
-    if (respuesta == 1) {
-        function calcularCompra(precioMoneda) {
-            let cantidad = parseFloat(prompt('Ingrese cantidad de pesos'));
-            if (!isNaN(cantidad)) {
-                let total = cantidad * precioMoneda;
-                alert(`El total a pagar en ${moneda} es de ${total}`);
-            } else {
-                alert('Cantidad ingresada no es valida, ingrese un monto correcto');
-            }
-        }
-        calcularCompra(precioMoneda);
-    } else if (respuesta == 2) {
-        alert('Gracias por su consulta, vuelva pronto.');
-    } else {
-        alert('Por favor, seleccione una opcion valida.');
-    } 
-
-    operando = parseInt(prompt('Gracias por su compra \nSi desea seguir operando escriba: 1 \nSi desea salir escriba: 2'));
-    if (operando == 2) {
-        break;
-    }
-}
-
-if (operando == 2) {
-    alert('Gracias por su visita, vuelva pronto.');
-}
-else {
-    alert('No tiene más intentos, vuelva pronto.');
-}
-
-
-
-
-
-
-
+console.log(productos);
