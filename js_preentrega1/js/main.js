@@ -7,7 +7,7 @@ let operando;
 
 for (let i = 0; i < 2; i++)
 {
-    let moneda = prompt('Seleccione la moneda con valor numerico:  \n Dolar \n Libra \n Euro \n Real').toLocaleLowerCase();
+    let moneda = prompt('Escriba la moneda que desea comprar:  \n Dolar \n Libra \n Euro \n Real').toLocaleLowerCase();
 
     let dolar = 1355.00 
     let libraEsterlina = 1604.00
