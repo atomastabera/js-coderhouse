@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="tarjeta" class="cardProducto">
+            <template id="templateTarjeta">
+                <div class="card">
+                <h4>Producto</h4>   
+                <p>Precio $</p>
+                <button class="btnAddCard">AGREGAR AL CARRITO</button>
+                </div>
+            </template>
+        </div>
+        <div class="cardCarrito">
+            <h4>Carrito</h4>
+            <p id="carritoTotal">TOTAL</p>
+            <div id="tarjetaCarrito" class="cart-card">
+                <template id="templateCarrito">
+                    <h4>Producto</h4>
+                    <p id="precio">Precio $<p>
+                    <p id="cantidad">Cantidad: </p>
+                    <button class="btnRemove">QUITAR</button>
+                </template>
+            </div>
+            <button id="realizarCompra" class="btnRealizarCompra">REALIZAR COMPRA</button>
+            <button id="vaciarCarrito" class="btnVaciarCarrito">VACIAR CARRITO</button>
+        </div>
+    </div>
+    <script src="js/main_preentrega3.js"></script>
+</body>
+</html>

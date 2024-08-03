@@ -5,11 +5,10 @@ alert(`Bienvenido ${nombre} ${apellido}, a continuacion seleccione la moneda que
 
 let operando;
 
-for (let i = 0; i < 2; i++)
-{
+for (let i = 0; i < 2; i++) {
     let moneda = prompt('Escriba la moneda que desea comprar:  \n Dolar \n Libra \n Euro \n Real').toLocaleLowerCase();
 
-    let dolar = 1355.00 
+    let dolar = 1355.00
     let libraEsterlina = 1604.00
     let euro = 1433.00
     let real = 249.00
@@ -56,7 +55,7 @@ for (let i = 0; i < 2; i++)
         alert('Gracias por su consulta, vuelva pronto.');
     } else {
         alert('Por favor, seleccione una opcion valida.');
-    } 
+    }
 
     operando = parseInt(prompt('Gracias por su compra \nSi desea seguir operando escriba: 1 \nSi desea salir escriba: 2'));
     if (operando == 2) {
