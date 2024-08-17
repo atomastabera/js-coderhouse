@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #68aae06b;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.cardProducto, .cardCarrito {
+    background-color: #474747;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 20px;
+    width: 45%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h4 {
+    margin-top: 0;
+}
+
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.card {
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    background-color: #fff;
+    max-width: 300px;
+}
+
+.btnAddCard {
+    background-color: #ebd935;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.btnRemove {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+    
+}
+
+.btnVaciarCarrito {
+    background-color: #ff2600;
+    color: rgb(255, 255, 255);
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
