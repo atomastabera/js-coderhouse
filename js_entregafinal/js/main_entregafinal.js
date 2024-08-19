@@ -28,6 +28,7 @@ function addProduct(id) {
         }
     }
     saveCarrito();
+    updateCartCount();
 }
 
 function removeProduct(id) {
@@ -37,6 +38,7 @@ function removeProduct(id) {
             delete carrito[id];
         }
         saveCarrito();
+        updateCartCount();
     }
 }
 
@@ -94,19 +96,71 @@ productos.forEach((producto) => {
     boton.addEventListener('click', () => {
         Toastify({
             text: "Agregaste un producto a tu carrito 🛒",
-            duration: 1000
-            }).showToast();
+            duration: 800
+        }).showToast();
         addProduct(producto.id);
     });
 
     productCards.appendChild(newCard);
 });
 
-let boton = document.querySelector('#vaciarCarrito');
+let botonVaciar = document.querySelector('#vaciarCarrito');
 
-boton.addEventListener('click', () => {
+botonVaciar.addEventListener('click', () => {
     carrito = {};
     saveCarrito();
+    updateCartCount();
 });
 
+document.querySelector('.btn-dark').addEventListener('click', function () {
+    Swal.fire({
+        title: 'Datos personales',
+        html: `
+            <input type="text" id="nombre" class="swal2-input" placeholder="Nombre Completo">
+            <input type="email" id="email" class="swal2-input" placeholder="Correo Electrónico">
+            <input type="text" id="direccion" class="swal2-input" placeholder="Dirección">
+            <select id="tipoPago" class="swal2-select">
+                <option value="" disabled selected>Selecciona el método de pago</option>
+                <option value="Tarjeta">Tarjeta</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Efectivo">Efectivo</option>
+            </select>
+        `,
+        confirmButtonText: 'Aceptar',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        preConfirm: () => {
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const direccion = document.getElementById('direccion').value;
+            const tipoPago = document.getElementById('tipoPago').value;
+
+            if (!tipoPago) {
+                Swal.showValidationMessage('Por favor, elija un metodo de pago.');
+            } else {
+                return {
+                    nombre: nombre,
+                    email: email,
+                    direccion: direccion,
+                    tipoPago: tipoPago
+                };
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log(result.value);
+            Swal.fire({
+                icon: 'success',
+                title: 'Compra realizada',
+                text: 'Tu compra ha sido procesada con éxito.'
+            });
+        }
+    });
+});
+
+function updateCartCount() {
+    let itemCount = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
+    cartCount.textContent = itemCount;
+}
 renderCarrito();
+updateCartCount();
