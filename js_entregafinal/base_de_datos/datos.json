@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "nombre": "Remera",
+        "precio": 15000,
+        "stock": 1
+    },
+    {
+        "id": 2,
+        "nombre": "Pantalon",
+        "precio": 20000,
+        "stock": 16
+    },
+    {
+        "id": 3,
+        "nombre": "Bufanda",
+        "precio": 10000,
+        "stock": 1
+    },
+    {
+        "id": 4,
+        "nombre": "Buzo",
+        "precio": 8000,
+        "stock": 7
+    },
+    {
+        "id": 5,
+        "nombre": "Sueter",
+        "precio": 25000,
+        "stock": 9
+    },
+    {
+        "id": 6,
+        "nombre": "Sueter de lana",
+        "precio": 25000,
+        "stock": 13
+    },
+    {
+        "id": 7,
+        "nombre": "Camiseta deportiva",
+        "precio": 12000,
+        "stock": 15
+    },
+    {
+        "id": 8,
+        "nombre": "Shorts de verano",
+        "precio": 10000,
+        "stock": 3
+    },
+    {
+        "id": 9,
+        "nombre": "Vestido largo",
+        "precio": 22000,
+        "stock": 6
+    },
+    {
+        "id": 10,
+        "nombre": "Camisa formal",
+        "precio": 27000,
+        "stock": 8
+    },
+    {
+        "id": 11,
+        "nombre": "Campera de invierno",
+        "precio": 40000,
+        "stock": 16
+    }
+]
