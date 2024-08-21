@@ -1,13 +1,13 @@
-let set_id = 1;
+
 let productos = []; 
 let carrito = JSON.parse(localStorage.getItem('carrito')) || {}; 
 let cartCount = document.querySelector('#cartCount');
 class Producto {
-    constructor(nombre, precio, stock) {
-        this.id = set_id++;
+    constructor(id, image, nombre, precio) {
+        this.id = id;
+        this.image = image
         this.nombre = nombre;
         this.precio = precio;
-        this.stock = stock || Math.ceil((Math.random() * 20));
     };
 };
 
@@ -17,11 +17,11 @@ function renderProducts() {
     productos.forEach((producto) => {
         let newCard = document.querySelector('#templateTarjeta').content.cloneNode(true);
 
+        newCard.querySelector('img').src = producto.image;
         newCard.querySelector('h4').textContent = producto.nombre;
         newCard.querySelector('p').textContent += producto.precio;
 
         let boton = newCard.querySelector('button');
-
         boton.addEventListener('click', () => {
             Toastify({
                 text: "Agregaste un producto a tu carrito 🛒",
@@ -96,7 +96,7 @@ function validateEmptyCart() {
 
 function updateTotal() {
     let total = Object.values(carrito).reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
-    document.querySelector('#carritoTotal').textContent = `Total $${total}`;
+    document.querySelector('#carritoTotal').textContent = `Total $${parseFloat(total).toFixed(2)}`;
 }
 
 let botonVaciar = document.querySelector('#vaciarCarrito');
@@ -168,10 +168,10 @@ function updateCartCount() {
     cartCount.textContent = itemCount;
 }
 
-fetch('./base_de_datos/datos.json')
+fetch('https://fakestoreapi.com/products')
     .then(response => response.json())
     .then(data => {
-        productos = data.map(item => new Producto(item.nombre, item.precio, item.stock));
+        productos = data.map(item => new Producto(item.id, item.image, item.title, item.price));
         renderProducts();
     })
     .catch(error => console.error('Error fetching products:', error)); 
